@@ -1,0 +1,111 @@
+{%extends 'meeting/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="detailBody">
+    
+    <div class="chatSection">
+        <h1 class="text-center" style="font-family:copperplate;"> Communication Section </h1><hr>
+        <!-- Video Chatting feature -->
+        <p>Chrome recommeded for the best chatting experience.</p>
+        <p>Other browers might casue compatability error</p>
+            <form class=" row justify-content-center">
+                <label for="username" class="mr-2">Name:</label>
+                <input type="text" name=”username” id="username">
+                <button id="join_leave">Join Call</button>
+            </form>
+            
+            <p class="row justify-content-center" id="count"></p>
+        
+            <div id="container" class="container">
+                <div id="local" class="participant"><div></div><div></div></div>
+            </div>
+            <script src="//media.twiliocdn.com/sdk/js/video/releases/2.3.0/twilio-video.min.js"></script>
+            <script src="{% static 'js/app.js' %}"></script>
+
+            <hr>
+<!-- Text Chatting feature -->
+            <h2 class="addComments">Discussion Notes: </h2>
+            {% for discussions in post.discussions.all%}
+                <article class="media">
+                    <div class="media-content">
+                        <p>
+                            <strong>{{discussions.name}}</strong>   <small>{{discussions.date_added}}</small>
+                        </p>
+                        <br>
+                        {{discussions.body}}
+                    </div>
+                </article>
+
+            {% empty %}
+            <div class="noWords">
+                <p>No one has said anything yet.</p>
+            </div>
+            {% endfor %}
+            <hr>
+
+            <h2 class="addComments">Your Opinions: </h2>
+            <form method="POST" action=".">
+                {%csrf_token%}
+                {{form.as_p}}
+
+            <div class="field">
+                <div class="control">
+                    <button class="button is-success">Send</button>
+                </div>
+            </div>
+            </form>
+    </div>
+
+<!-- Detailed Info of the topics -->
+    <div class="detailContent">
+        <h1 class="subtitle">{{ post.title }}</h1>
+
+            <small>Posted at {{ post.date_added }}</small>
+            <br/>
+            <small>Estimated Duration: {{ post.time_duration }} mins</small>
+            <p>Description:</p>
+            <p>{{post.body}}</p>
+            {% if post.image %}
+            <img src="{{post.image.url}}" />
+            {% endif %}
+    </div>
+</div>
+           
+
+            <!-- <hr>
+
+            <h2 class="addComments">Discussion: </h2>
+            {% for comments in post.discussions.all%}
+                <article class="media">
+                    <div class="media-content">
+                        <p>
+                            <strong>{{comments.name}}</strong>   <small>{{comments.date_added}}</small>
+                        </p>
+                        <br>
+                        {{comments.body}}
+
+                    </div>
+                </article>
+
+            {% empty %}
+            <div class="noWords">
+                <p>No one has said anything yet.</p>
+            </div>
+            {% endfor %}
+            <hr>
+
+            <h2 class="addComments">Your opinions </h2>
+            <form method="POST" action=".">
+                {%csrf_token%}
+                {{form.as_p}}
+
+            <div class="field">
+                <div class="control">
+                    <button class="button is-success">Send</button>
+                </div>
+            </div>
+        </form> -->
+
+{%endblock%}
+

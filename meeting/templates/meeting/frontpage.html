@@ -1,0 +1,22 @@
+{% extends 'meeting/base.html' %}
+
+{% block content %}
+    <p>Following topics are listed in a descending order based on the date posted</p>
+    <br/>
+    <ul class="post block">
+    {% for post in allPosts %}
+            <li>
+                <bold><h2 class="subtitle">Topics: {{ post.title }}</h2></bold>
+
+                <small>Time Duration: {{ post.time_duration }} mins</small>
+
+                <p>Briefing: {{ post.intro }}</p>
+
+                <button class="button is-info is-light" onclick="location.href='{% url 'postDetail' post.pk %}' ">Go Discuss</button>
+                <button class="button is-success is-light" onclick="location.href='{% url 'updatePage' post.pk %}' ">Update</button>
+                <button class="button is-danger is-light" onclick="location.href='{% url 'deletePage' post.pk %}' ">Delete</button>
+            </li>    
+            <br/>    
+    {% endfor %}
+    </ul>   
+{% endblock %}

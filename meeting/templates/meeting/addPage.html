@@ -1,0 +1,18 @@
+{% extends 'meeting/base.html' %}
+
+{% block content %}
+    <h1 class="addTopics">Create New Topics </h1>
+
+   <!-- allow form to accept different form data -->
+   <table>
+    <form method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        {{form.as_table}}
+        <div class="control">
+            <button class="button is-success">Add</button>
+        </div> 
+    </form>
+</table>
+
+   
+{% endblock %}

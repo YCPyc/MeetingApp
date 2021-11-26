@@ -1,0 +1,14 @@
+{% extends 'meeting/base.html' %}
+
+
+{% block content %}
+    <h1 class="addTopics">Delete {{post.detail}} </h1>
+    <form method="POST">
+        {%csrf_token%}
+        <p>Are you sure you want to delete the topics and every discussion inside?</p>
+        <div class="control">
+            <button class="button is-danger is-light">Delete</button>
+        </div>
+    </form>
+   
+{% endblock %}
